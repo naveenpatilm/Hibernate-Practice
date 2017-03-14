@@ -1,11 +1,14 @@
 package org.naveen.tutorial.dto;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +25,8 @@ public class UserDetails {
 	@Id
 	@GeneratedValue
 	private int userId;
+	@ElementCollection
+	private Set<Address> addressSet = new HashSet();
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "HOME_STREET_NAME")),
 			@AttributeOverride(name = "city", column = @Column(name = "HOME_CITY_NAME")),
@@ -84,7 +89,13 @@ public class UserDetails {
 	public void setOfficeAddress(Address officeAddress) {
 		this.officeAddress = officeAddress;
 	}
-	
-	
+
+	public Set<Address> getAddressSet() {
+		return addressSet;
+	}
+
+	public void setAddressSet(Set<Address> addressSet) {
+		this.addressSet = addressSet;
+	}	
 
 }

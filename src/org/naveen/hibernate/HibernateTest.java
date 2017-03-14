@@ -19,7 +19,7 @@ public class HibernateTest {
 		addr1.setStreet("uday school road");
 		addr1.setPincode("590016");
 		user.setHomeAddress(addr1);
-		
+
 		Address addr2 = new Address();
 		addr2.setCity("Belgaum");
 		addr2.setState("karnataka");
@@ -28,15 +28,15 @@ public class HibernateTest {
 		user.setOfficeAddress(addr2);
 		user.setJoinedDate(new Date());
 		user.setDescription("First user's description");
-		
-		SessionFactory sessionFactory = 
-				new Configuration().configure().buildSessionFactory();
+		user.getAddressSet().add(addr1);
+		user.getAddressSet().add(addr2);
+
+		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.save(user);
 		session.getTransaction().commit();
 		session.close();
-		
 
 	}
 
