@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
@@ -15,7 +16,7 @@ import javax.persistence.TemporalType;
 @Table (name="USER_DETAILS")
 public class UserDetails {
 
-	@Id
+	@Id @GeneratedValue
 	private int userId;
 	@Basic
 	private String userName;
