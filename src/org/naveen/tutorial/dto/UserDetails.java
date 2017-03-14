@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,11 +19,12 @@ public class UserDetails {
 
 	@Id @GeneratedValue
 	private int userId;
+	@Embedded
+	private Address address;
 	@Basic
 	private String userName;
 	@Temporal (TemporalType.DATE)
 	private Date joinedDate;
-	private String address;
 	@Lob
 	private String description;
 
@@ -50,14 +52,6 @@ public class UserDetails {
 		this.joinedDate = joinedDate;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -65,6 +59,12 @@ public class UserDetails {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
+	
 	
 	
 	
