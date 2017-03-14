@@ -1,5 +1,7 @@
 package org.naveen.tutorial.dto;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,10 +15,16 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "USER_DETAILS")
@@ -26,7 +34,10 @@ public class UserDetails {
 	@GeneratedValue
 	private int userId;
 	@ElementCollection
-	private Set<Address> addressSet = new HashSet();
+	@JoinTable(name = "USER_ADDRESS", joinColumns = @JoinColumn(name = "USER_ID"))
+	@GenericGenerator(name = "sequence-gen", strategy = "sequence")
+	@CollectionId(columns = { @Column(name = "ADDRESS_ID") }, generator = "sequence-gen", type = @Type(type = "long"))
+	private Collection<Address> addressSet = new ArrayList<Address>();
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "street", column = @Column(name = "HOME_STREET_NAME")),
 			@AttributeOverride(name = "city", column = @Column(name = "HOME_CITY_NAME")),
@@ -90,12 +101,12 @@ public class UserDetails {
 		this.officeAddress = officeAddress;
 	}
 
-	public Set<Address> getAddressSet() {
+	public Collection<Address> getAddressSet() {
 		return addressSet;
 	}
 
 	public void setAddressSet(Set<Address> addressSet) {
 		this.addressSet = addressSet;
-	}	
+	}
 
 }
