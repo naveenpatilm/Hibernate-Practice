@@ -50,3 +50,6 @@ Temporary Items
 .settings/org.eclipse.jdt.core.prefs
 *.class
 bin/hibernate.cfg.xml
+/target/
+
+*.prefs
