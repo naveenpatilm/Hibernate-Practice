@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -33,6 +34,9 @@ public class UserDetails {
 	@Id
 	@GeneratedValue
 	private int userId;
+	@OneToOne
+	@JoinColumn(name = "VEHICLE_ID")
+	private Vehicle vehicle;
 	@ElementCollection
 	@JoinTable(name = "USER_ADDRESS", joinColumns = @JoinColumn(name = "USER_ID"))
 	@GenericGenerator(name = "sequence-gen", strategy = "sequence")
@@ -107,6 +111,14 @@ public class UserDetails {
 
 	public void setAddressSet(Set<Address> addressSet) {
 		this.addressSet = addressSet;
+	}
+
+	public Vehicle getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 
 }
