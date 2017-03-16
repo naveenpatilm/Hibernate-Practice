@@ -34,6 +34,8 @@
 		<!-- Names the annotated entity class -->
 		<mapping class="org.naveen.tutorial.dto.UserDetails" />
 		<mapping class="org.naveen.tutorial.dto.Vehicle" />
+		<mapping class="org.naveen.tutorial.dto.TwoWheeler" />
+		<mapping class="org.naveen.tutorial.dto.FourWheeler" />
 
 	</session-factory>
 
